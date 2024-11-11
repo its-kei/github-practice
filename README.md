@@ -206,6 +206,7 @@ If you have time, reverse roles of User A and B and repeat the exercise. However
 In this exercise, we will work on a separate workflow, where both users have push access to the same repository. We will start afresh on this exercise (i.e., we'll be creating a new Github repository and working in different local directories compared to those above).
 
 The basic idea of this workflow is that:
+<<<<<<< HEAD
 
 - *User B* will host a GitHub repository
 - *User A* __and__ *User B* will have push access to the repository
@@ -222,6 +223,23 @@ The basic idea of this workflow is that:
 	- when they are satisfied that it works, *User B* merges into `main` 
 	- *User B* pushes `main` back to the remote to close the PR
 	- Both users update their local `main` branches
+=======
+	- *User B* will host a GitHub repository
+	- *User A* __and__ *User B* will have push access to the repository
+	- the `main` branch of the GitHub repo is the "stable" version of the code
+		- neither user will ever push directly to the `main` branch
+	- each user will use their own `main` branch to track the stable version of the code
+	- in order for e.g., *User A* to update the stable code base, they will take the following steps:
+		- make sure that the local `main` branch is up to date with the remote `main` branch
+		- create a local `devel` branch from the local `main` branch
+		- make changes to the code on the local `devel` branch
+		- push the `devel` branch to GitHub
+		- submit a pull request on GitHub to merge `devel` into `main` and request a code review from *User B*
+		- *User B* then `fetch`es the remote `devel` branch and tests it out locally
+		- when they are satisfied that it works, *User B* merges into `main` 
+		- *User B* pushes `main` back to the remote to close the PR
+		- Both users update their local `main` branches
+>>>>>>> upstream/main
 
 ### Determine users
 
@@ -282,6 +300,7 @@ Once the files are in their desired location, *User B* should confirm that they 
 ### User A: Clone the repository
 
 1. *User A* should use `cd` in their terminal to navigate to a directory where they wish to download *User B*'s (shared) repository.
+<<<<<<< HEAD
 
 2. *User A* should execute `git clone git@github.com:<user_b_name>/<user_b_repo>` to clone the repository.
 
@@ -294,6 +313,15 @@ Once the files are in their desired location, *User B* should confirm that they 
 	
 - E.g., use `cd <user_b_repo>` and `ls` to change working directory into the newly downloaded repository and list its contents.
 
+=======
+2. *User A* should execute `git clone git@github.com:<user_b_name>/<user_b_repo>` to clone the repository.
+	- Note the use of __*User B*'s user name__ in the above.
+	- be sure to use the `git@github.com:<user_b_name>/<user_b_repo>` syntax and __not__ `https://github.com/<user_b_name>/<user_b_repo>` syntax.
+	- You can confirm what web address was used to add the remote by executing `git remote -v`.
+	- If the output of `git remote -v` shows that you accidentally used `https://` syntax in your `git clone` command then *User A* should remove the origin `remote` using `git remote remove origin` and then re-add the remote using "ssh"-style syntax: `git remote add origin git@github.com:<user_a_name>/<user_a_repo>`.
+3. *User A* should confirm that a folder called `<user_b_repo>` was added to the current working directory of their terminal.
+	- E.g., use `cd <user_b_repo>` and `ls` to change working directory into the newly downloaded repository and list its contents.
+>>>>>>> upstream/main
 ------------------------------------------------------------------------
 
 ### User A and B: Confirm that both users have `origin` remote
@@ -338,6 +366,7 @@ Both *User A* and *User B* should execute `git remote -v` and confirm that both 
 	- E.g., confirm that the report builds properly when you execute `make` and that the section headers are appropriately changed.
 
 __If the code does not build properly__:
+<<<<<<< HEAD
 
 - *User B* should leave comments on the GitHub pull request describing the errors that they are seeing.
 - *User A* and *User B* should discuss to determine the source of the errors.
@@ -346,6 +375,15 @@ __If the code does not build properly__:
 	- *User B* deletes the local `devel-titles` branch, `git branch -d devel-titles`
 	- *User B* fetches changes, `git fetch origin`
 	- *User B* goes back to Step 3 above.
+=======
+	- *User B* should leave comments on the GitHub pull request describing the errors that they are seeing.
+	- *User A* and *User B* should discuss to determine the source of the errors.
+	- *User A* should update the code on their local `devel-titles` branch, `add`, `commit`, and `push` to GitHub.
+	- Once new code has been pushed to GitHub *User B* should retrieve the updated code. There are several ways to do this. The easiest way to do this is probably:
+		- *User B* deletes the local `devel-titles` branch, `git branch -d devel-titles`
+		- *User B* fetches changes, `git fetch origin`
+		- *User B* goes back to Step 3 above.
+>>>>>>> upstream/main
 
 __If the code does build properly__:
 
@@ -362,11 +400,18 @@ __If the code does build properly__:
 ### User A and B: Make sure local `main` is up to date
 
 Both *User A* and *User B* should now ensure their local main branch is up to date.
+<<<<<<< HEAD
 
 - E.g., both users could use `git fetch origin`, `git checkout main`, `git merge origin/main`
 - Or more simply, both users could use `git pull origin main`
 - These commands should not do anything for *User B*, since they had already merged `devel-titles` into `main` in the above steps.
 - These commands __should do something__ for *User A*, since they had not updated their `main` branch with the changes on the `devel-titles` branch.
+=======
+	- E.g., both users could use `git fetch origin`, `git checkout main`, `git merge origin/main`
+	- Or more simply, both users could use `git pull origin main`
+	- These commands should not do anything for *User B*, since they had already merged `devel-titles` into `main` in the above steps.
+	- These commands __should do something__ for *User A*, since they had not updated their `main` branch with the changes on the `devel-titles` branch.
+>>>>>>> upstream/main
 
 ------------------------------------------------------------------------
 
@@ -412,6 +457,7 @@ Similarly, add this `col = ` option to the other histograms.
 	- E.g., confirm that the report builds properly when you execute `make` and that the histogram colors are appropriately changed.
 
 __If the code does not build properly__:
+<<<<<<< HEAD
 
 - *User A* should leave comments on the GitHub pull request describing the errors that they are seeing.
 - *User A* and *User B* should discuss to determine the source of the errors.
@@ -420,6 +466,15 @@ __If the code does not build properly__:
 	- *User A* deletes the local `devel-colors` branch, `git branch -d devel-colors`
 	- *User A* fetches changes, `git fetch origin`
 	- *User A* goes back to Step 3 above.
+=======
+	- *User A* should leave comments on the GitHub pull request describing the errors that they are seeing.
+	- *User A* and *User B* should discuss to determine the source of the errors.
+	- *User B* should update the code on their local `devel-colors` branch, `add`, `commit`, and `push` to GitHub.
+	- Once new code has been pushed to GitHub *User A* should retrieve the updated code. There are several ways to do this. The easiest way to do this is probably:
+		- *User A* deletes the local `devel-colors` branch, `git branch -d devel-colors`
+		- *User A* fetches changes, `git fetch origin`
+		- *User A* goes back to Step 3 above.
+>>>>>>> upstream/main
 
 __If the code does build properly__:
 
@@ -436,9 +491,16 @@ __If the code does build properly__:
 ### User A and B: Make sure local `main` is up to date
 
 Both *User A* and *User B* should now ensure their local main branch is up to date.
+<<<<<<< HEAD
 
 - E.g., both users could use `git fetch origin`, `git checkout main`, `git merge origin/main`
 - Or more simply, both users could use `git pull origin main`
 - These commands should not do anything for *User A*, since they had already merged `devel-colors` into `main` in the above steps.
 - These commands __should do something__ for *User B*, since they had not updated their `main` branch with the changes on the `devel-colors` branch.
+=======
+	- E.g., both users could use `git fetch origin`, `git checkout main`, `git merge origin/main`
+	- Or more simply, both users could use `git pull origin main`
+	- These commands should not do anything for *User A*, since they had already merged `devel-colors` into `main` in the above steps.
+	- These commands __should do something__ for *User B*, since they had not updated their `main` branch with the changes on the `devel-colors` branch.
+>>>>>>> upstream/main
 
